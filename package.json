@@ -1,0 +1,32 @@
+{
+  "name": "codequaff-server",
+  "version": "0.1.0",
+  "description": "Server for CodeQuaff",
+  "main": "main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/greglo/codequaff-server.git"
+  },
+  "keywords": [
+    "codequaff",
+    "programming",
+    "coding",
+    "hacking",
+    "drinking"
+  ],
+  "author": "Greg O'Connor",
+  "license": "BSD-2-Clause",
+  "bugs": {
+    "url": "https://github.com/greglo/codequaff-server/issues"
+  },
+  "dependencies": {
+    "logfmt": "~1.0.0-pre2",
+    "express": "~3.4.8"
+  },
+  "engines": {
+    "node": "0.10.x"
+  }
+}
