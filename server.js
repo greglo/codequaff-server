@@ -1,5 +1,5 @@
-var cl = require('./client');
-var lo = require('./lobby');
+var cl = require('./models/client');
+var ls = require('./models/lobbyset');
 
 var WebSocketServer = require('ws').Server
   , http = require('http')
@@ -12,27 +12,34 @@ app.use(express.static(__dirname + '/'));
 var server = http.createServer(app);
 server.listen(port);
 
-var lobbies = {};
-console.log(lo);
-console.log(lo.Lobby);
-lobbies[0] = new lo.Lobby(0);
+var lobbySet = new ls.LobbySet();
 
 
 var wss = new WebSocketServer({server: server});
 var nextId = 0;
 wss.on('connection', function(ws) {
     var clientId = nextId++;
-    var client = new cl.Client(clientId, 0, ws);
-    var lobby = lobbies[0];
+    var lobbyId = 0;
 
-    console.log(client);
-    console.log(lobby);
+    if (!lobbySet.lobbyExists(lobbyId)) {
+        lobbySet.createLobby(lobbyId);
+    }
+    var lobby = lobbySet.getLobbyById(lobbyId);
+    var client = new cl.Client(clientId, 0, ws);
 
     ws.on('close', function() {
-        console.log(client.clientId + ' closed their connection');
+        console.log(clientId + ' closed their connection');
+        lobby.removeClientById(clientId);
+        if (lobby.getSize() < 1) {
+            console.log("Removing lobby id: " + lobby.lobbyId);
+            lobbySet.removeLobby(lobby.lobbyId);
+        } else {
+            lobby.broadCastString(clientId + " left the lobby");
+        }
     });
 
     ws.on('message', function(message) {
         console.log(client.clientId + ": " + message);
+        lobby.broadCastString(clientId + " said: " + message);
     });
 });
