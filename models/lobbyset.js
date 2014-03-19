@@ -1,15 +1,24 @@
-function Lobby(lobbyId) {
-    this.lobbyId = lobbyId;
-    this._clients = {};
+var lo = require('./lobby');
+
+function LobbySet() {
+    this._lobbies = {};
 }
 
-Lobby.prototype.addClient = function(client) {
-    var id = client.clientId;
-    this._clients[id] = client;
+LobbySet.prototype.createLobby = function(lobbyId) {
+    var lobby = new lo.Lobby(lobbyId);
+    this._lobbies[lobbyId];
 };
 
-Lobby.prototype.removeClientById = function(clientId) {
-    delete this_clients[clientId];
+LobbySet.prototype.lobbyExists = function(lobbyId) {
+    return lobbyId in this._lobbies;
 };
 
-exports.Lobby = Lobby;
+LobbySet.prototype.getLobbyById = function(lobbyId) {
+    return this._lobbies[lobbyId];
+};
+
+LobbySet.prototype.deleteLobby = function(lobbyId) {
+    delete this._lobbies[lobbyId];
+};
+
+exports.LobbySet = LobbySet;
