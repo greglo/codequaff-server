@@ -1,3 +1,6 @@
+var Client = require('./client');
+var Lobby = require('./lobby');
+
 var WebSocketServer = require('ws').Server
   , http = require('http')
   , express = require('express')
@@ -9,27 +12,25 @@ app.use(express.static(__dirname + '/'));
 var server = http.createServer(app);
 server.listen(port);
 
-console.log('http server listening on %d', port);
+var lobbies = {};
+lobbies[0] = new Lobby(0);
+
 
 var wss = new WebSocketServer({server: server});
-
-console.log('websocket server created');
-
+var nextId = 0;
 wss.on('connection', function(ws) {
-    console.log(ws);
+    var clientId = nextId++;
+    var client = new Client(clientId, 0, ws);
+    var lobby = lobbies[0];
 
-    var id = setInterval(function() {
-        ws.send(JSON.stringify(new Date()), function() {  });
-    }, 5000);
-
-    console.log('');
+    console.log(client);
+    console.log(lobby);
 
     ws.on('close', function() {
-        console.log('websocket connection close');
-        clearInterval(id);
+        console.log(client.clientId + ' closed their connection');
     });
 
     ws.on('message', function(message) {
-        console.log(ws._id + ": " + message);
+        console.log(client.clientId + ": " + message);
     });
 });
