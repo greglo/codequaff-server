@@ -28,7 +28,8 @@ Lobby.prototype.getSize = function() {
 Lobby.prototype.broadcastString = function(str) {
     for (var clientId in this._clients) {
         var client = this._clients[clientId];
-        client.sendString(str);
+        console.log("Sending to " + clientId + ": " + str)
+        //client.sendString(str);
     }   
 };
 
