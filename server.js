@@ -1,5 +1,5 @@
-var Client = require('./client');
-var Lobby = require('./lobby');
+var Client = require('./client').Client;
+var Lobby = require('./lobby').Lobby;
 
 var WebSocketServer = require('ws').Server
   , http = require('http')
