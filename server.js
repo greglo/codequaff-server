@@ -40,6 +40,6 @@ wss.on('connection', function(ws) {
 
     ws.on('message', function(message) {
         console.log(client.clientId + ": " + message);
-        lobby.broadCastString(clientId + " said: " + message);
+        lobby.broadcastString(clientId + " said: " + message);
     });
 });
