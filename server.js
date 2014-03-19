@@ -1,5 +1,5 @@
-var Client = require('./client').Client;
-var Lobby = require('./lobby').Lobby;
+var client = require('./client');
+var lobby = require('./lobby');
 
 var WebSocketServer = require('ws').Server
   , http = require('http')
@@ -13,7 +13,9 @@ var server = http.createServer(app);
 server.listen(port);
 
 var lobbies = {};
-lobbies[0] = new Lobby(0);
+console.log(lobby);
+console.log(lobby.Lobby);
+lobbies[0] = new lobby.Lobby(0);
 
 
 var wss = new WebSocketServer({server: server});
