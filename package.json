@@ -24,7 +24,8 @@
   },
   "dependencies": {
     "logfmt": "~1.0.0-pre2",
-    "express": "~3.4.8"
+    "express": "~3.4.8",
+    "ws": "0.4.x"
   },
   "engines": {
     "node": "0.10.x"
