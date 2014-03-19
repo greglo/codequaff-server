@@ -30,6 +30,6 @@ wss.on('connection', function(ws) {
     });
 
     ws.on('message', function(message) {
-        console.log(message);
+        console.log(ws._id + ": " + message);
     });
 });
