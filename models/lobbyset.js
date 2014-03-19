@@ -6,7 +6,7 @@ function LobbySet() {
 
 LobbySet.prototype.createLobby = function(lobbyId) {
     var lobby = new lo.Lobby(lobbyId);
-    this._lobbies[lobbyId];
+    this._lobbies[lobbyId] = lobby;
 };
 
 LobbySet.prototype.lobbyExists = function(lobbyId) {

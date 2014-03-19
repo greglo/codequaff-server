@@ -29,7 +29,7 @@ Lobby.prototype.broadcastString = function(str) {
     for (var clientId in this._clients) {
         var client = this._clients[clientId];
         console.log("Sending to " + clientId + ": " + str)
-        //client.sendString(str);
+        client.sendString(str);
     }   
 };
 
