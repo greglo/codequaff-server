@@ -1,5 +1,5 @@
-var client = require('./client');
-var lobby = require('./lobby');
+var cl = require('./client');
+var lo = require('./lobby');
 
 var WebSocketServer = require('ws').Server
   , http = require('http')
@@ -13,16 +13,16 @@ var server = http.createServer(app);
 server.listen(port);
 
 var lobbies = {};
-console.log(lobby);
-console.log(lobby.Lobby);
-lobbies[0] = new lobby.Lobby(0);
+console.log(lo);
+console.log(lo.Lobby);
+lobbies[0] = new lo.Lobby(0);
 
 
 var wss = new WebSocketServer({server: server});
 var nextId = 0;
 wss.on('connection', function(ws) {
     var clientId = nextId++;
-    var client = new Client(clientId, 0, ws);
+    var client = new cl.Client(clientId, 0, ws);
     var lobby = lobbies[0];
 
     console.log(client);
