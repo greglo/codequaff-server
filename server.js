@@ -34,7 +34,7 @@ wss.on('connection', function(ws) {
             console.log("Removing lobby id: " + lobby.lobbyId);
             lobbySet.removeLobby(lobby.lobbyId);
         } else {
-            lobby.broadCastString(clientId + " left the lobby");
+            lobby.broadcastString(clientId + " left the lobby");
         }
     });
 
