@@ -1,4 +1,4 @@
-function Client(clientId, lobbyId, ws) {
+function Client(clientId, name, lobbyId, ws) {
     this.clientId = clientId;
     this.lobbyId = lobbyId;
     this._ws = ws;

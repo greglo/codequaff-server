@@ -20,12 +20,14 @@ var nextId = 0;
 wss.on('connection', function(ws) {
     var clientId = nextId++;
     var lobbyId = 0;
+    var generatedName = 'Greg'
 
     if (!lobbySet.lobbyExists(lobbyId)) {
         lobbySet.createLobby(lobbyId);
     }
     var lobby = lobbySet.getLobbyById(lobbyId);
-    var client = new cl.Client(clientId, 0, ws);
+    var client = new cl.Client(clientId, generatedName, 0, ws);
+    client.sendString("Your username is: " + generatedName)
 
     ws.on('close', function() {
         console.log(clientId + ' closed their connection');
